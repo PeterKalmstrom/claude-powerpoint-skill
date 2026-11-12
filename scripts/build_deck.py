@@ -43,6 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 
+from _animate import kAnimSchema, kSlideAnimation  # noqa: E402
 from _figures import kFigures  # noqa: E402
 from _measure import LINE_HEIGHT, kMeasure  # noqa: E402  (the skill's own helpers sit beside this script)
 from _rules import NOTES_DIVIDER, SCRIPT_MIN_WORDS, kRules  # noqa: E402
@@ -245,7 +246,7 @@ PATTERNS = {"title": "Title", "section": "Section", "statement": "Statement", "b
             "matrix": "Matrix", "email": "Email", "kpi_chart": "KpiChart", "cost_table": "CostTable",
             "quiz": "Quiz", "risks": "Risks", "metrics": "Metrics", "next_steps": "NextSteps", "image_text": "ImageText"}  # pattern -> kSlidePatterns method
 NUMERIC_KEYS = {"values", "trend", "plan", "actual", "highlight", "highlight_row", "highlight_metric", "focus_x", "focus_y", "amount", "line",
-                "correct"}
+                "correct", "animate"}  # animate: times, scales and path points stay numbers (_animate.py)
 HIGHLIGHT_ITEMS = {"kpi": "metrics", "compare": "columns", "process": "steps", "timeline": "events",
                    "matrix": "quadrants", "chart": "categories", "kpi_chart": "categories", "cost_table": "rows",
                    "risks": "risks", "metrics": "rows"}
@@ -259,7 +260,7 @@ SEVERITY_ORDER = {"error": 0, "warn": 1, "info": 2}
 PLAN_SKIP = {"notes", "id", "pattern", "image", "type", "reveal", "visual", "likelihood", "impact", "categories",
              "series", "header", "rows", "number_format", "alt", "highlight", "trend", "trend_labels", "kicker",
              "allow_split", "decision_label", "window", "_moved", "icon", "icons", "auto_icons", "side",
-             "answer_title", "explain", "plan", "actual", "unit"}  # a quiz's answer and why: on the answer slide or in the notes, not the quiz
+             "answer_title", "explain", "plan", "actual", "unit", "animate"}  # a quiz's answer and why: on the answer slide or in the notes, not the quiz
 NO_CHROME = {"title", "section"}            # no footer or page number on covers and dividers
 NO_KICKER = {"title", "section", "quote"}   # their own title treatment
 LEVELS = {"high": "HIGH", "medium": "MEDIUM", "low": "LOW"}
@@ -329,6 +330,7 @@ class kSpecSchema:
                          "title": {"type": ["string", "number"], "maxLength": Lim.get("title", 90),
                                    "description": "Write it as a claim, not a topic."},
                          "notes": NOTES_SCHEMA,
+                         "animate": kAnimSchema.Schema(),
                          "kicker": {"type": "string", "maxLength": KICKER_MAX,
                                     "description": "Small label above the title (at most three words); defaults "
                                                    "to the current section's eyebrow; \"\" for none."}}
@@ -1899,6 +1901,8 @@ class kDeckBuilder:
                 self.Reserve = False  # the footer and page number themselves sit in the band
                 self.Chrome(S, Sl, N)
                 self.Notes(S, Sl, kSlidePatterns.ExtraNotes(Sl))
+                if Sl.get("animate"):  # native build steps, after every shape of the slide exists
+                    kSlideAnimation(S, self.Prs.slide_width, self.Prs.slide_height).Apply(Sl["animate"], self.Report)
                 if Sl["pattern"] == "quiz" and Sl.get("reveal") == "slide":  # the answer on a slide of its own
                     N += 1
                     self.Numbers.append(N)

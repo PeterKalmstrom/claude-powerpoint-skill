@@ -23,7 +23,8 @@ MINUS = "−"
 NUM_RE = re.compile(r"(?<![\w.,])([+\-−]?)((?:\d{1,3}(?:[,   ]\d{3})+|\d+)(?:[.,]\d+)?)(?!\w)"
                     r"(\s?%)?")
 EXPR_RE = re.compile(r"(?<![\w.,])\d+(?:[.,]\d+)?(?:\s*[-+*/×÷−]\s*\d+(?:[.,]\d+)?)+(?![\w.,]\d)")
-PAIR_RE = re.compile(r"(?<![\w.,])(\d+(?:[.,]\d+)?)\s?%?\s*(?:to|→|->|–)\s*(\d+(?:[.,]\d+)?)(?!\w)")
+DATE_RE = re.compile(r"(?<![\d.])\d+([/-])\d+\1\d+")  # '2025/07/01', '01-02-2026': three parts, same separator, no spaces
+PAIR_RE =re.compile(r"(?<![\w.,])(\d+(?:[.,]\d+)?)\s?%?\s*(?:to|→|->|–)\s*(\d+(?:[.,]\d+)?)(?!\w)")
 FRACTION_RE = re.compile(r"(?<![\w.,])(\d+)\s*(?:/|of|out of)\s*(\d+)(?![\w.,]\d)")
 CLAUSE_RE = re.compile(r"[;\n•]|(?<!\d)[.,](?!\d)|[.,](?=\s)|\s—\s|\s-\s(?!\d)")
 TOTAL_CUE = re.compile(r"\b(?:sum|summed|total|totals|combined|altogether|cumulative|full[- ]year|year[- ]to[- ]date|"
@@ -112,6 +113,9 @@ class kFigures:
             return None
         try:
             Text = str(Expr).replace("×", "*").replace("÷", "/").replace(MINUS, "-").replace(",", ".")
+            if DATE_RE.search(Text):
+                return None  # '2025/07/001-7', '01-02-2026': a date or a reference number, not a sum
+            Text = re.sub(r"(?<![\d.])0+(?=\d)", "", Text)  # '05 + 3': ast rejects leading zeros on integers
             if not re.fullmatch(r"\s*[-+]?\d+(?:\.\d+)?(?:\s*[-+*/]\s*\d+(?:\.\d+)?)*\s*", Text):
                 return None  # not plain arithmetic: not a figure to check
             return kFigures.Node(ast.parse(Text, mode="eval").body)

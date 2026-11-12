@@ -15,6 +15,7 @@ Referenced from `SKILL.md`. Run them with `uvx` so their dependencies never touc
 | `extract_theme.py` | `python-pptx` (any OS) | Theme colours, fonts, layouts and placeholders as JSON, or a `brand-spec.md` skeleton |
 | `make_test_templates.py` | `python-pptx` (any OS) | Writes two fictional test templates (16:9 `.potx`, 4:3 `.pptx`) for `build_deck.py --template` / `--inspect`; `_template.py` holds the layout mapping and template warnings |
 | `render_lo.py` | LibreOffice + poppler (any OS) | Approximate slide PNGs without PowerPoint; `--sheet` adds a contact sheet |
+| `onion_sheet.py` | `python-pptx`, `pillow`; LibreOffice or Windows + PowerPoint | Onion-skin sheet per animated slide: a frame per build beat, the finished slide over a ghost of the start, arrival order numbered, motion paths drawn (`_animate.py` writes and reads the animation) |
 | `diff_renders.py` | `pillow`, `numpy` (any OS) | Which slides changed between two render folders, with heat maps |
 | `visual_check.py` | `pillow`, `numpy` (any OS) | Looks at renders like a reviewer: empty bands and empty card bottoms, lopsided or crowded slides, list-like stacks, deck outliers; each with a spec edit (`--json`, `--metrics`); part of `build_deck.py --check` |
 | `backup_snapshot.py` | Python only | Timestamped side copy of a deck before a risky edit |

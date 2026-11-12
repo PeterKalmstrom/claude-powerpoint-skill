@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- **HyperFrames clips in decks** (owner request 2026-10-26). New section *HyperFrames Integration* in
+  `reference/MEDIA.md`: catalog block, brand kit (`brand.css` with `--brand-*` variables), data, type floor, render,
+  then embed with a poster frame. It also covers transparent WebM/MOV overlays over native slide content (alpha
+  checked in the files; playback in PowerPoint not yet checked) and the worker pitfalls (ffprobe, render cancelled
+  when the shell exits). Worked example in `X:\Source\PPTSkill\hyperframes-test\`.
+
+- **Native animation from the spec, and an onion sheet to check it** (owner request 2026-10-26, techniques taken
+  as ideas from StykAnimate - GPL-3.0, so no code). Any slide takes `animate`: steps with `target` (shape names,
+  `*` patterns), `effect` (`appear`, `fade`, `float_up`, `wipe`, `zoom`, `path`), `at`, `dur`, `stagger` (groups by
+  the first number in a shape's name), `ease` (`linear`/`in`/`out`/`in_out` -> accel/decel) and, for `path`, points
+  in pt with an optional smooth `curve`. Written as one automatic `<p:timing>` sequence with absolute delays; an
+  unmatched target or a build over 5 s is a `fit:` error. New `scripts/_animate.py` (`kAnimSchema`, `kMotionPath`,
+  `kTimingXml`, `kSlideAnimation`, `kTimingReader`) and `scripts/onion_sheet.py` (frames per beat, ghost of the
+  start, arrival numbers, motion paths). Self-test: `scripts/selftest_animate.py` (12 checks); schema regenerated.
+
 - **Several decks in one call** (benchmark round 10: 22-23 tool calls for five decks against ~11 for plain Claude,
   one `--plan`, one `--check` and one image read per deck). `build_deck.py a.json b.json --check --apply` runs every
   spec (three at a time), prints one `batch summary`, one `contact-all.png` with a row per deck and a `BATCH-JSON`

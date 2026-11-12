@@ -24,7 +24,7 @@ full path.
 
 ### LibreOffice without administrator rights (optional)
 
-`scripts/render_lo.py` (approximate renders, any OS) needs LibreOffice and `pdftoppm`. Without admin rights, extract
+`scripts/render_lo.py` (approximate renders, any OS) needs LibreOffice and `pdftoppm` (`pdftoppm` is found automatically in the bundled `using-poppler` skill). Without admin rights, extract
 the official MSI instead of installing it - no registry, no elevation:
 
 ```powershell

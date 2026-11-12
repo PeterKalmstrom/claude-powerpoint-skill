@@ -40,4 +40,40 @@ wait for motion to finish before they read.
 - Honour the audience: no endless loops on content people must read, and no motion lasting more than ~5 s without
   the presenter's control (`a11y_motion_overload`).
 
+### Animation from the spec (`animate`, any OS)
+
+`build_deck.py` writes native animation from a slide's `animate` list - no PowerPoint needed, and every effect
+follows the traps above by construction (one automatic sequence, absolute delays, a filled shape built as one
+object). Each step:
+
+| Field | Meaning |
+|---|---|
+| `target` | Shape name(s) on the built slide; `*` and `?` match (`"Card*"`). A name that matches nothing is a `fit:` error that lists the slide's shapes. |
+| `effect` | `appear`, `fade`, `float_up`, `wipe`, `zoom`, `path` |
+| `at` / `dur` | Start in seconds from slide start (default: when the step before ends) / seconds per shape |
+| `stagger` | Seconds between groups of matched shapes; a group = shapes sharing the first number in their name, so `Card1`, `Card1Edge`, `Value1`, `Label1` arrive together |
+| `ease` | `linear`, `in`, `out`, `in_out` (PowerPoint accel/decel). Default: `out` for float_up and zoom, `in_out` for path |
+| `direction` / `from` / `rise` | wipe: side it comes from · zoom: start scale (0.5) · float_up: pt it rises from (30) |
+| `path` / `curve` | path: points `[x, y]` in pt from the shape's place (y grows downwards); `curve: true` draws a smooth curve through them |
+
+```json
+"animate": [
+  {"target": "Title 1", "effect": "fade", "dur": 0.4},
+  {"target": ["Card*", "Value*", "Label*"], "effect": "float_up", "stagger": 0.3},
+  {"target": "Marker1", "effect": "path", "path": [[120, -60], [240, 0]], "curve": true, "at": 1.4}
+]
+```
+
+A build that runs past 5 s is a `fit:` error (`animate_long`). Use a motion path for **travel** - a token moving
+along a process, a marker to its place - not to decorate.
+
+### Check the build without playing it: the onion sheet
+
+`scripts/onion_sheet.py deck.pptx [--slides 4] [--out folder]` writes `onion-sNNN.png` per animated slide: a strip
+of frames (before the build, then after every beat - effects that start together) and one onion frame - the
+finished slide over a faint ghost of where the moving shapes start, each beat numbered where its shapes arrive,
+every motion path drawn in amber with its end marked. Look at it once: wrong order, a path that overshoots or
+leaves the slide, or too many beats show at a glance. It reads any deck's native animation, built or not; renders
+through LibreOffice (any OS) or PowerPoint (Windows).
+
 ---

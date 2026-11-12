@@ -254,6 +254,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -424,6 +524,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -593,6 +793,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -858,6 +1158,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -1062,6 +1462,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -1316,6 +1816,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -1506,6 +2106,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -1718,6 +2418,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -1922,6 +2722,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -2165,6 +3065,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -2381,6 +3381,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -2564,6 +3664,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -2803,6 +4003,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -3003,6 +4303,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -3191,6 +4591,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -3401,6 +4901,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -3641,6 +5241,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -3943,6 +5643,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -4164,6 +5964,106 @@
                   }
                 ]
               },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
+              },
               "kicker": {
                 "type": "string",
                 "maxLength": 30,
@@ -4371,6 +6271,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -4582,6 +6582,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",
@@ -4808,6 +6908,106 @@
                     }
                   }
                 ]
+              },
+              "animate": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "target",
+                    "effect"
+                  ],
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "Shape name(s) on the built slide; * and ? match (\"Card*\"). build_deck.py lists the names when one matches nothing."
+                    },
+                    "effect": {
+                      "enum": [
+                        "appear",
+                        "fade",
+                        "float_up",
+                        "wipe",
+                        "zoom",
+                        "path"
+                      ]
+                    },
+                    "at": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Start, seconds from slide start (default: when the step before ends)."
+                    },
+                    "dur": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10,
+                      "description": "Seconds per shape."
+                    },
+                    "ease": {
+                      "enum": [
+                        "linear",
+                        "in",
+                        "out",
+                        "in_out"
+                      ],
+                      "description": "Default: out for float_up and zoom, in_out for path, else linear."
+                    },
+                    "stagger": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "Seconds between the groups of matched shapes (a group = the shapes sharing the first number in their name)."
+                    },
+                    "direction": {
+                      "enum": [
+                        "left",
+                        "right",
+                        "top",
+                        "bottom"
+                      ],
+                      "description": "wipe: the side it comes from."
+                    },
+                    "from": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "zoom: start scale (default 0.5)."
+                    },
+                    "rise": {
+                      "type": "number",
+                      "description": "float_up: pt it rises from (default 30)."
+                    },
+                    "path": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      },
+                      "description": "path: points [x, y] in pt from the shape's place (it starts at [0, 0]); y grows downwards."
+                    },
+                    "curve": {
+                      "type": "boolean",
+                      "description": "path: a smooth curve through the points."
+                    }
+                  }
+                },
+                "description": "Native animation: steps that start automatically from slide start (reference/ANIMATION.md). Keep the whole build near 2 s."
               },
               "kicker": {
                 "type": "string",

@@ -230,6 +230,11 @@ none of them but is close to one — a slip, not a different quantity — is a `
 unchanged), and `lint_deck.py` reports the same on the built deck as `figure_mismatch` from the charts' data and
 the text. A total row in a `table` (first cell *Total*) is checked against its column.
 
+### Animation
+
+Any slide takes `animate`: build steps (fade, float up, wipe, zoom, motion paths with easing and stagger) written
+as native PowerPoint animation. Fields and the onion-sheet check: [ANIMATION](ANIMATION.md#animation-from-the-spec-animate-any-os).
+
 ### Filling the slide
 
 Content is laid out from the title's foot to the bottom margin and from margin to margin: cards and tiles take the

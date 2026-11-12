@@ -18,7 +18,8 @@ only the reference file the task needs.
 | **Improve a deck someone already has** | [Restyle or keep the look](#existing-deck-restyle-or-keep-the-look) below |
 | **Review / audit a deck** | `scripts/lint_deck.py` first (any OS) · `scripts/fix_deck.py deck.pptx --out fixed.pptx` (or `--in-place`, or `--dry-run`; one is required) for the mechanical fixes · then [AUDIT](reference/AUDIT.md): taste pass → anchor exceptions → contact sheet |
 | **Before a talk** | Audit clean first, then [PRESENTING](reference/PRESENTING.md) |
-| **Images, video, Remotion, Veo** | [MEDIA](reference/MEDIA.md), then [ANIMATION](reference/ANIMATION.md) if it moves |
+| **Images, video, Remotion, HyperFrames, Veo** | [MEDIA](reference/MEDIA.md), then [ANIMATION](reference/ANIMATION.md) if it moves |
+| **Animate a built deck** | `animate` steps in the spec (fade, float up, wipe, zoom, motion paths, easing) → `scripts/onion_sheet.py` to check the build → [ANIMATION](reference/ANIMATION.md#animation-from-the-spec-animate-any-os) |
 | **PowerPoint automation failing (Windows)** | [SETUP](reference/SETUP.md) → Troubleshooting |
 | **No Windows (Linux, macOS, CI)** | [AUTOMATION](reference/AUTOMATION.md) → *Building .pptx without PowerPoint* |
 | **Company template / brand** | `build_deck.py --inspect brand.potx`, then `--template brand.potx` → [BUILDER](reference/BUILDER.md#building-into-a-company-template); hand-built: [LAYOUT](reference/LAYOUT.md) → *Building from a template* |

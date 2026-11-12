@@ -44,6 +44,7 @@ from selftest_plausibility import kSelfTestPlausibility
 from selftest_suggest import kSelfTestSuggest
 from selftest_timeline import kSelfTestPlanActual
 from selftest_batch import kSelfTestBatch
+from selftest_animate import kSelfTestAnimate
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 A_NS = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
@@ -493,6 +494,9 @@ class kSelfTest:
             Plain = " ".join(str(Text).replace(" ", " ").split())
             self.Check("figures: {change|abs} drops the sign", Plain == "up 44 %, +44 %" and not Errs,
                        f"{Text} {Errs}")
+            self.Check("figures: a date or reference number is not a sum (error report 2026-10-26)",
+                       kFigures.Evaluate("2025/07/001-7") is None and kFigures.Evaluate("05 + 3") == 8.0
+                       and not kS.ErrorMode)
             from build_deck import kSlidePatterns
             Mail = {"pattern": "email", "callouts": [{"target": "body", "line": 2, "note": "c"},
                                                      {"target": "subject", "note": "b"},
@@ -2645,6 +2649,7 @@ class kSelfTestApp:
             kSelfTestPlausibility(Test).Run()  # invented goals, terse objection answers (selftest_plausibility.py)
             kSelfTestPlanActual(Test).Run()  # cover tone, plan-vs-actual timeline (selftest_timeline.py)
             kSelfTestBatch(Test).Run()  # several specs in one --check call, slides: summary (selftest_batch.py)
+            kSelfTestAnimate(Test).Run()  # animate steps, motion paths, easing, onion sheet (selftest_animate.py)
             Test.CheckThemeAndRenders()
             Test.CheckVisualCheck()
             Test.CheckVisualDarkTheme()

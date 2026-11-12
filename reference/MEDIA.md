@@ -294,6 +294,50 @@ Remotion renders are fast enough to iterate:
 
 ---
 
+## HyperFrames Integration (Animated Video from HTML)
+
+[HyperFrames](https://github.com/heygen-com/hyperframes) (HeyGen, Apache 2.0) renders an HTML page with a seekable
+GSAP timeline to MP4, WebM or MOV in headless Chrome. It is plain HTML with no React and no build step, and it has a
+catalog of about 450 ready-made blocks (charts, lower thirds, titles, transitions, textures). Pick it over Remotion
+when a catalog block already does the move; the skills `hyperframes`, `hyperframes-cli` and `hyperframes-registry`
+hold its full contract. Worked example: `X:\Source\PPTSkill\hyperframes-test\` (verified 2026-10-26, v0.8.200).
+
+### Steps: a clip for one slide
+
+1. **Scaffold:** `npx --yes hyperframes@0.8.200 init <clip>` (pin the version; the scaffold's `package.json` does too).
+2. **Pick from the catalog first:** `npx hyperframes catalog --query "<the move, in English>" --json`, then
+   `npx hyperframes add <name> --json`. A block lands in `compositions/<name>.html`. Mount it in `index.html` with
+   `data-composition-src`, a `data-composition-id` equal to the block's own id, and an `id` (Studio warns without one).
+3. **Brand kit:** keep the deck's colours and fonts in one `brand.css` with `--brand-*` custom properties, link it
+   from `index.html`, and point the block's literal colours and `font-family` at the variables. Blocks such as
+   `data-chart` and `lt-clean-bar` hard-code both, so this step is needed on install.
+4. **Data:** the block's data arrays and scale maxima are plain JS in the block (`data-chart`: `months`,
+   `revenueData`, `conversionData`, `maxRevenue`, `maxConversion`). Give the bars and the line scales that do not
+   overlap, because their value labels collide otherwise.
+5. **Readable on a slide:** run `npx hyperframes check`. Its `text_below_floor` warning (under 28 px at 1080p) is
+   real for a slide, and the catalog blocks ship with 11-16 px labels.
+6. **Render:** `npx hyperframes render -o clip.mp4 -q delivery`. A 12 s 1080p clip took about 50 s on a CPU-only
+   Linux worker. A render is cancelled when the calling shell exits (`render_cancelled_parent_exited`), so run it
+   as a tracked background job, not `nohup`/`setsid` from a short command.
+7. **Embed:** use the last frame as the poster (`ffmpeg -ss <end-0.5> -i clip.mp4 -frames:v 1 poster.png`) and
+   either COM `AddMediaObject2` (below) or python-pptx
+   `slide.shapes.add_movie(path, 0, 0, W, H, poster_frame_image=poster, mime_type="video/mp4")`.
+
+**Needs:** Node 22+, plus `ffmpeg` and `ffprobe` on PATH (the render fails up front without ffprobe). On a worker
+without them, `pip install imageio-ffmpeg` (ffmpeg) and `npm i ffprobe-static` (ffprobe) work. Blocks load GSAP and
+Google Fonts from a CDN, so the render needs internet.
+
+### Transparent overlays
+
+Use `body { background: transparent }` and `render --format webm` (VP9 with alpha, about 100 KB for 5 s) or
+`--format mov` (ProRes 4444, about 15 MB for 5 s). Both keep the alpha: the WebM decodes to `rgba` with
+`ffmpeg -c:v libvpx-vp9`. The overlay goes full-slide on top of native shapes. Its poster must be a frame where
+the overlay is visible, not the last one, because a lower third has left by then. **Not verified yet:** whether
+desktop PowerPoint plays either file with transparency (see the VP9 caution under "Embedding video" below). Keep
+an MP4 with the slide background rendered in as the fallback.
+
+---
+
 ## Veo Integration (AI Video Generation)
 
 Google Veo 3.1 generates photorealistic video from text prompts via the Gemini API. This is the missing piece that enables true "prompt to video in a slide" — no stock footage, no manual animation, just describe what you want and get an MP4.
