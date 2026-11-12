@@ -8,7 +8,7 @@ another, a group being every shape that shares the first number in its name (Car
 pt relative to its own place - straight segments, or a smooth curve through them with `curve`.
 
 Everything starts automatically from one trigger with absolute delays (reference/ANIMATION.md). The XML recipes
-mirror the ones verified against PowerPoint in the kPptx TypeScript library (PptxTimingAtoms / PptxTimingEffects).
+are the ones PowerPoint itself writes for these effects (checked against decks saved by desktop PowerPoint).
 kTimingReader reads them back for the onion sheet (onion_sheet.py).
 """
 import fnmatch

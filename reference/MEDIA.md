@@ -299,8 +299,8 @@ Remotion renders are fast enough to iterate:
 [HyperFrames](https://github.com/heygen-com/hyperframes) (HeyGen, Apache 2.0) renders an HTML page with a seekable
 GSAP timeline to MP4, WebM or MOV in headless Chrome. It is plain HTML with no React and no build step, and it has a
 catalog of about 450 ready-made blocks (charts, lower thirds, titles, transitions, textures). Pick it over Remotion
-when a catalog block already does the move; the skills `hyperframes`, `hyperframes-cli` and `hyperframes-registry`
-hold its full contract. Worked example: `X:\Source\PPTSkill\hyperframes-test\` (verified 2026-10-26, v0.8.200).
+when a catalog block already does the move; its full contract (CLI, catalog, composition rules) is in the
+HyperFrames repository. The steps below were verified on 2026-10-26 with HyperFrames v0.8.200.
 
 ### Steps: a clip for one slide
 

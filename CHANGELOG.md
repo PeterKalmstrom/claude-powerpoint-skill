@@ -6,7 +6,7 @@
   `reference/MEDIA.md`: catalog block, brand kit (`brand.css` with `--brand-*` variables), data, type floor, render,
   then embed with a poster frame. It also covers transparent WebM/MOV overlays over native slide content (alpha
   checked in the files; playback in PowerPoint not yet checked) and the worker pitfalls (ffprobe, render cancelled
-  when the shell exits). Worked example in `X:\Source\PPTSkill\hyperframes-test\`.
+  when the shell exits).
 
 - **Native animation from the spec, and an onion sheet to check it** (owner request 2026-10-26, techniques taken
   as ideas from StykAnimate - GPL-3.0, so no code). Any slide takes `animate`: steps with `target` (shape names,
